@@ -2,11 +2,11 @@
 name = "electrs"
 version = "0.4.1"
 authors = ["Roman Zeyde <me@romanzey.de>"]
-description = "An efficient re-implementation of Electrum Server in Rust"
+description = "An efficient re-implementation of Viacoin Electrum Server in Rust"
 license = "MIT"
-homepage = "https://github.com/romanz/electrs"
-repository = "https://github.com/romanz/electrs"
-keywords = ["bitcoin", "electrum", "server", "index", "database"]
+homepage = "https://github.com/viacoin/electrs"
+repository = "https://github.com/viacoin/electrs"
+keywords = ["viacoin", "bitcoin", "electrum", "server", "index", "database"]
 documentation = "https://docs.rs/electrs/"
 readme = "README.md"
 
@@ -42,6 +42,6 @@ hyper = "0.12"
 url = "1.0"
 lru-cache = "0.1.1"
 
-[dependencies.bitcoin]
+[dependencies.viacoin]
 version = "0.15.1"
 features = ["serde"]
