@@ -44,7 +44,7 @@ pub struct Config {
 impl Config {
     pub fn from_args() -> Config {
         let network_help = format!(
-            "Select Bitcoin network type ({})",
+            "Select Viacoin network type ({})",
             Network::names().join(", ")
         );
 
@@ -70,13 +70,13 @@ impl Config {
             .arg(
                 Arg::with_name("daemon_dir")
                     .long("daemon-dir")
-                    .help("Data directory of Bitcoind (default: ~/.bitcoin/)")
+                    .help("Data directory of Viacoind (default: ~/.viacoin/)")
                     .takes_value(true),
             )
             .arg(
                 Arg::with_name("cookie")
                     .long("cookie")
-                    .help("JSONRPC authentication cookie ('USER:PASSWORD', default: read from ~/.bitcoin/.cookie)")
+                    .help("JSONRPC authentication cookie ('USER:PASSWORD', default: read from ~/.viacoin/.cookie)")
                     .takes_value(true),
             )
             .arg(
@@ -100,7 +100,7 @@ impl Config {
             .arg(
                 Arg::with_name("daemon_rpc_addr")
                     .long("daemon-rpc-addr")
-                    .help("Bitcoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet and 127.0.0.1:18443 for regtest)")
+                    .help("Bitcoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:5222 for mainnet, 127.0.0.1:25222 for testnet and 127.0.0.1:25222 for regtest)")
                     .takes_value(true),
             )
             .arg(
@@ -171,9 +171,9 @@ impl Config {
         let parent_genesis_hash = parent_network.genesis_hash().to_hex();
 
         let default_daemon_port = match network_type {
-            Network::Bitcoin => 8332,
-            Network::Testnet => 18332,
-            Network::Regtest => 18443,
+            Network::Bitcoin => 5222,
+            Network::Testnet => 25222,
+            Network::Regtest => 25222,
 
             #[cfg(feature = "liquid")]
             Network::Liquid => 7041,
@@ -215,7 +215,7 @@ impl Config {
             .value_of("daemon_rpc_addr")
             .unwrap_or(&format!("127.0.0.1:{}", default_daemon_port))
             .parse()
-            .expect("invalid Bitcoind RPC address");
+            .expect("invalid Viacoind RPC address");
         let electrum_rpc_addr: SocketAddr = m
             .value_of("electrum_rpc_addr")
             .unwrap_or(&format!("127.0.0.1:{}", default_electrum_port))
@@ -237,7 +237,7 @@ impl Config {
             .map(|p| PathBuf::from(p))
             .unwrap_or_else(|| {
                 let mut default_dir = home_dir().expect("no homedir");
-                default_dir.push(".bitcoin");
+                default_dir.push(".viacoin");
                 default_dir
             });
         match network_type {
