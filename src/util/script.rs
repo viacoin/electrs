@@ -1,8 +1,8 @@
 use crate::chain::Network;
 use crate::util::{Address, Payload};
 use bitcoin::Script;
-use bitcoin_bech32::constants::Network as B32Network;
-use bitcoin_bech32::{u5, WitnessProgram};
+use viacoin_bech32::constants::Network as B32Network;
+use viacoin_bech32::{u5, WitnessProgram};
 use bitcoin_hashes::{hash160::Hash as Hash160, Hash};
 
 // @XXX we can't use any of the Address:p2{...}h utility methods, since they expect the pre-image data, which we don't have.

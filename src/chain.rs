@@ -7,7 +7,7 @@ pub use elements::{confidential, Block, BlockHeader, OutPoint, Transaction, TxIn
 use bitcoin::blockdata::constants::genesis_block;
 use bitcoin::network::constants::Network as BNetwork;
 use bitcoin::util::hash::BitcoinHash;
-use bitcoin_bech32::constants::Network as B32Network;
+use viacoin_bech32::constants::Network as B32Network;
 use bitcoin_hashes::sha256d::Hash as Sha256dHash;
 
 #[cfg(not(feature = "liquid"))]

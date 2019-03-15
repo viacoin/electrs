@@ -19,7 +19,7 @@
 use std::fmt::{self, Display, Formatter};
 use std::str::FromStr;
 
-use bitcoin_bech32::{self, u5, WitnessProgram};
+use viacoin_bech32::{self, u5, WitnessProgram};
 use bitcoin_hashes::{hash160, Hash};
 
 use crate::chain::Network;
@@ -148,15 +148,15 @@ impl Address {
 
     #[inline]
     /// convert Network to bech32 network (this should go away soon)
-    fn bech_network(network: Network) -> bitcoin_bech32::constants::Network {
+    fn bech_network(network: Network) -> viacoin_bech32::constants::Network {
         match network {
-            Network::Bitcoin => bitcoin_bech32::constants::Network::Bitcoin,
-            Network::Testnet => bitcoin_bech32::constants::Network::Testnet,
-            Network::Regtest => bitcoin_bech32::constants::Network::Regtest,
+            Network::Bitcoin => viacoin_bech32::constants::Network::Bitcoin,
+            Network::Testnet => viacoin_bech32::constants::Network::Testnet,
+            Network::Regtest => viacoin_bech32::constants::Network::Regtest,
 
             // this should never actually happen, Liquid does not have bech32 addresses
             #[cfg(feature = "liquid")]
-            Network::Liquid | Network::LiquidRegtest => bitcoin_bech32::constants::Network::Bitcoin,
+            Network::Liquid | Network::LiquidRegtest => viacoin_bech32::constants::Network::Bitcoin,
         }
     }
 
@@ -231,9 +231,9 @@ impl FromStr for Address {
         {
             let witprog = WitnessProgram::from_address(s)?;
             let network = match witprog.network() {
-                bitcoin_bech32::constants::Network::Bitcoin => Network::Bitcoin,
-                bitcoin_bech32::constants::Network::Testnet => Network::Testnet,
-                bitcoin_bech32::constants::Network::Regtest => Network::Regtest,
+                viacoin_bech32::constants::Network::Bitcoin => Network::Viacoin,
+                viacoin_bech32::constants::Network::Testnet => Network::ViacoinTestnet,
+                viacoin_bech32::constants::Network::Regtest => Network::Regtest,
                 _ => panic!("unknown network"),
             };
             if witprog.version().to_u8() != 0 {
